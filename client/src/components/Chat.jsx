@@ -40,7 +40,7 @@ return (
     
     <div className="App col-4 mx-auto">
     <div className="form-group">
-    <label className="m-4">{loggedInUser.firstName} Send a message:</label>
+    <label className="m-4">{loggedInUser.firstName} send a message:</label>
     <input 
         type="text" 
         value={input} 
@@ -48,7 +48,7 @@ return (
         className="form-control"
     />
     </div>
-    <button  onClick={sendToServer} className="btn btn-success">Send</button>
+    <button  onClick={sendToServer} className="btn btn-success m-4">Send</button>
 
 
     <ul className="list-group">

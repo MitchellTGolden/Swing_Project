@@ -33,6 +33,7 @@ const Game = props => {
 
     const handleFinalSave = e =>{
         e.preventDefault();
+        // setGames({...games, [games.completed] : true}) 
         Axios.put(`http://localhost:8000/swing/game/update/${props.gameId}`, games)
             .then(res => {
                 console.log(res.data.results)
@@ -72,7 +73,7 @@ const Game = props => {
             </div>
         {loaded && games.player1.scores.length !== 18 ? 
         
-            loaded && 
+        loaded && 
     <div className="d-flex justify-content-around">
         <form onSubmit={handleScoreSubmit} className="form-group m-5">
     <h1>Hole {holeNum}</h1> <br></br>
@@ -185,6 +186,7 @@ const Game = props => {
                 value={playerScore.player8}
             />
             </div>
+            
             : 
             ""}<br></br>
             </div>
@@ -214,7 +216,6 @@ const Game = props => {
                                 <th rowSpan="2">Final Score</th>
                             </tr> 
                                 <tr>
-
                                     <td>1</td>
                                     <td>2</td>
                                     <td>3</td>
@@ -271,13 +272,6 @@ const Game = props => {
                             total={games.player5.scores.reduce((a,b) => a+b,0)}
                         />
                     }
-                    {games.player5.user &&                        
-                        <Score 
-                            player={games.player5}
-                            num={5}
-                            total={games.player5.scores.reduce((a,b) => a+b,0)}
-                        />
-                    }
                     {games.player6.user &&                        
                         <Score 
                             player={games.player6}
@@ -303,6 +297,24 @@ const Game = props => {
                     </table>
                 </div>
             }
+            <div className="d-flex justify-content-around p-5">
+                
+                { loaded && 
+                <ul className="list-group">
+                {games.messages.map((m,i) => {
+            return (
+                <li className="list-group-item" key={i}>
+                {m.messages}
+                </li>
+        )})
+            
+        }
+        </ul>
+        }
+        {/* <li>{user.messages.messages}</li> */}
+        
+
+        </div>
             </div>
 
     )}

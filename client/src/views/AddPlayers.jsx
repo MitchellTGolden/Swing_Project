@@ -9,6 +9,7 @@ const AddPlayers = props => {
     const [games, setGames] = useState([])
     const [playerNum, setPlayerNum] = useState(1)
     const [loaded,setLoaded] = useState(false);
+    const [loadedAgain, setLoadedAgain] = useState(false)
     
     useEffect(() => {
         Axios.get(`http://localhost:8000/swing/game/${props.gameId}`,{withCredentials:true})
@@ -30,8 +31,10 @@ const AddPlayers = props => {
         e.preventDefault();
         console.log(`Player Form Value : ${playerForm._id}`)
         Axios.get(`http://localhost:8000/swing/addptog/${playerForm._id}/${props.gameId}/player`+playerNum.playerNum)
-            .then(res => {console.log(res)
-                    setLoaded(false)
+            .then(res => {
+                console.log(res)
+                setLoaded(!loaded)
+                setLoadedAgain(!loadedAgain)
                     
             })
             .then(res => {
@@ -81,6 +84,7 @@ const AddPlayers = props => {
             {/* {player.firstName}
                 input */}
                 <select value={playerNum.playerNum} onChange={handlePlayerNumInput} className="m-3 p-1">
+                <option >Player #</option>
                 <option value={1}>Player 1</option>
                 <option value={2}>Player 2</option>
                 <option value={3}>Player 3</option>
@@ -93,13 +97,9 @@ const AddPlayers = props => {
             <input type="submit" className="btn btn-primary " value="Add Player"></input> 
             <Link className="btn btn-primary ml-3" to={`/game/${games._id}`}>Back</Link>
             </form>
-            {
-                loaded && 
-                <div>
-                                        {games.player1.user &&
-
-<div>
-    <table className='m-4 mx-auto rounded table table-striped align-center col-4 text-center'>
+            {loaded || loadedAgain ? 
+        
+                <table className='m-4 mx-auto rounded table table-striped align-center col-4 text-center'>
         <thead>
             <tr>
                 <th rowSpan="2">Player #</th>
@@ -187,14 +187,16 @@ const AddPlayers = props => {
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
-</div>
-}
-                </div>
-            }
+                </tbody>
+            </table>
+            
+            : ""}
+            
+            
         </div>
+        
     )
+    
 }
         
 export default AddPlayers;

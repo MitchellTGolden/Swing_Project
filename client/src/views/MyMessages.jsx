@@ -30,10 +30,11 @@ const User = props => {
             <div className="d-flex justify-content-around p-5">
                 
                     { loaded && 
-                    <ul>
+                    <ul className="list-group"> 
+                    <h3>Messages</h3>
                     {user.messages.map((m,i) => {
                 return (
-                    <li key={i}>
+                    <li key={i} className="list-group-item">
                     {m.messages}
                     </li>
             )})

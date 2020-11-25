@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema({
 
 
 const GameSchema = new mongoose.Schema({
-    name:{
+    name:{ 
         type: String,
         required:[true,"A Group name is required"],
     },
@@ -81,7 +81,7 @@ const GameSchema = new mongoose.Schema({
         scores: [Number]
     },
 
-    player7:  {
+    player7:  { 
         user: UserSchema,
         scores: [Number]
     },
@@ -91,6 +91,11 @@ const GameSchema = new mongoose.Schema({
         scores: [Number]
     },
 
+    completed : {
+        type : Boolean,
+        default : false
+    },
+    
     messages : [MessageSchema]
 
 

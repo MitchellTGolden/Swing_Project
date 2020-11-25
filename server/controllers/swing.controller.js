@@ -35,7 +35,7 @@ module.exports = {
         .catch(err => console.log(err))
     },
     gameUpdate:(req,res) => {
-        Game.findOneAndUpdate({_id: req.params.id}, req.body)  
+        Game.findOneAndUpdate({_id: req.params.id}, req.body)
             .then(data => res.json({results:data}))
             .catch(err => res.json(err.errors))
     },
@@ -61,10 +61,13 @@ module.exports = {
                     .then(data => res.json({results:data}))
             })
     },
-    groupMessage:(req, res) => {
+    gameMessage:(req, res) => {
+        console.log(req.body)
         Message.create(req.body)
             .then(newMessage => {
-                Game.findByIdAndUpdate({_id: req.params.id}, {$push:{messages:newMessage}})
+                console.log(newMessage)
+                Game.findByIdAndUpdate({_id: req.params.id}, {$push:{"messages":newMessage}})
+                .then(data => res.json({results:data}))
             })
             .catch(err => res.json(err))
     },

@@ -10,11 +10,8 @@ const NavBar = props => {
 
     const logout = () => {
         Axios.get('http://localhost:8000/api/logout', { withCredentials: true })
-            .then(res => {
-                navigate('/')
-                localStorage.clear();
-                
-            })
+            .then(res => navigate('/'))
+            .then(res => localStorage.clear())
             .then(
                 Axios.get('http://localhost:8000/users')
                     .then(res => {
@@ -27,7 +24,10 @@ const NavBar = props => {
     return (
 <div>   
     <nav className="navbar navbar-expand-lg p-3 navbar-dark rounded bg-dark">
-            <Link to="/dashboard" className="nav-link">Room 42</Link>
+            <Link to="/dashboard" className="nav-link">
+                Swing
+                {/* <img src={require('../public/logo192.png')} alt="Logo"/> */}
+            </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>

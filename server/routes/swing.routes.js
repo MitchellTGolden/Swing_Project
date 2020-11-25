@@ -16,5 +16,7 @@ module.exports = (app) => {
     app.delete('/swing/user/delete/:id', SwingController.userDestroy);
     app.get('/swing/addptog/:userId/:gameId/:player', SwingController.addPlayerToGame)
     app.post('/swing/message/:id', swingController.directMessage);
+    app.post('/swing/message/game/:id', swingController.gameMessage);
+
 
 }
